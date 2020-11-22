@@ -78,10 +78,15 @@ Connect:
 			continue
 		}
 
+		// skip unsuccessful entries
 		if entry.Sev != "success" {
 			continue
 		}
 
+		// group entries by mathematically flooring a float which is the timestamp
+		// divided by the (interval multiplied by 1000 for milliseconds)
+		// this is a fairly simple grouping algorithm that doesn't take a lot of
+		// code wrangling to implement
 		timeGroup := math.Floor(float64(entry.EpochMs / (*interval * 1000)))
 
 		// if we have a new time grouping, print the old one
@@ -92,6 +97,8 @@ Connect:
 
 			// serialize to json
 			for k, v := range groupings {
+
+				// deserialize our statsd format
 				keys := strings.Split(k, ".")
 
 				// create the aggregate for output
@@ -117,6 +124,8 @@ Connect:
 			// reinitialize
 			groupings = map[string]int{}
 		}
+
+		// update the time group
 		timeGroupSeen = int(timeGroup)
 
 		// bump the count if we've seen this combo, else set to 1

@@ -2,9 +2,9 @@
 
 ## Running the solution
 
-To run the program, execute the following command, which includes a specification for the grouping interval in seconds. The reader will need to have a `go` binary available, this was tested with 1.13. There are no esoteric go version needs. All library calls are from the core library, no external dependencies are needed.
+To run the program, execute the following command, which includes a specification for the grouping interval in seconds. The reader will need to have a `go` binary available, this was tested with 1.13. There are no esoteric go version needs. All library calls are from the core library, no external dependencies are needed. The default interval is 5 seconds.
 
-`go run main.go --interval`
+`go run main.go --interval=5`
 
 
 ## Solution architecture
