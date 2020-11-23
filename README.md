@@ -14,9 +14,11 @@ To run the program, execute the following command, which includes a specificatio
 ### To run the multihost implementation (on one host):
 
 > start up the worker
+
 `go run multihost_main.go --my_host="127.0.0.1:5555"`
 
 > start up the aggregator
+
 `go run multihost_main.go`
 
 
