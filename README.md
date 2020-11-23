@@ -2,7 +2,7 @@
 
 ## Overview
 
-Hello! I spent between 4-5 hours to develop this solution to the observability exercise. I chose Go as the implementation language since I'm a bit faster to develop there than Java (and time was of the essence), yet many of the data structures and methods will be similar to a Java based approach. I have provided three implementations, a simple version for a single processor implementation, an implementation using Go channels and goroutines (worker threads) for the multi-processor implementation, and a distributed implementation using UDP for gossip between hosts. There are some limitations to this approach, but it was quick to implement a feature complete solution.
+Hello! I spent between 4-5 hours to develop this solution to the observability exercise. I chose Go as the implementation language since I'm a bit faster to develop there than Java (and time was of the essence), yet many of the data structures and methods will be similar to a Java based approach. I have provided three implementations, a simple version for a single processor implementation, an implementation using Go channels and goroutines (worker threads) for the multi-processor implementation, and a distributed implementation using UDP for gossip between hosts. There are some limitations to this approach, but it was quick to implement a feature complete solution. In a production situation, I would refactor functionality between the three approaches, but for this exercise I created a new implementation containing the previous structure.
 
 ## Running the solution
 
