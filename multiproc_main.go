@@ -41,6 +41,7 @@ func main() {
 
 	interval = flag.Int("interval", 5, "grouping interval in seconds")
 	cores = flag.Int("cores", 2, "number of cores for deserialization")
+	flag.Parse()
 
 	// channel to send deserialized entries to the aggregator
 	jsonChan := make(chan string)
