@@ -40,7 +40,7 @@ The multihost implementation follows the same approach as the multicore, but sen
 ## Assumptions
 
 * Time interval grouping need not be on integer boundaries (groupings are starttime+interval)
-* Data presented in the exercise specifications are representative of data that needs to be processed (though "busted data:..." was an interesting variation, I added a regex sanitizer in the multi-host version to deal with that).
+* Data presented in the exercise specifications are representative of data that needs to be processed (though "busted data:..." was an interesting variation, I added a regex sanitizer to deal with that).
 
 ## Further Work
 
