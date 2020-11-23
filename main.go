@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"math"
 	"net/http"
+	"regexp"
 	"strings"
 	"time"
 )
@@ -50,6 +51,12 @@ Connect:
 
 	// the last time grouping seen
 	timeGroupSeen := 0
+
+	// regexp to sanitize title data
+	reg, err := regexp.Compile("[^a-zA-Z0-9]+")
+	if err != nil {
+		panic(err)
+	}
 
 	// setup a reader
 	reader := bufio.NewReader(resp.Body)
@@ -129,7 +136,8 @@ Connect:
 		timeGroupSeen = int(timeGroup)
 
 		// bump the count if we've seen this combo, else set to 1
-		key := strings.Join([]string{entry.Device, entry.Title, entry.Country}, ".")
+		sanitizedTitle := reg.ReplaceAllString(entry.Title, "")
+		key := strings.Join([]string{entry.Device, sanitizedTitle, entry.Country}, ".")
 		if val, ok := groupings[key]; ok {
 			groupings[key] = val + 1
 		} else {

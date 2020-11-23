@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"math"
 	"net/http"
+	"regexp"
 	"strings"
 	"time"
 )
@@ -97,6 +98,12 @@ Connect:
 // generally JSON deserialization is the constraint on most programs out there
 func deserialize(jsonChan chan string, aggChan chan AggKey) {
 
+	// regexp to sanitize title data
+	reg, err := regexp.Compile("[^a-zA-Z0-9]+")
+	if err != nil {
+		panic(err)
+	}
+
 	for {
 		// read data off the channel
 		data := <-jsonChan
@@ -113,7 +120,8 @@ func deserialize(jsonChan chan string, aggChan chan AggKey) {
 			continue
 		}
 
-		key := strings.Join([]string{entry.Device, entry.Title, entry.Country}, ".")
+		sanitizedTitle := reg.ReplaceAllString(entry.Title, "")
+		key := strings.Join([]string{entry.Device, sanitizedTitle, entry.Country}, ".")
 
 		// group entries by mathematically flooring a float which is the timestamp
 		// divided by the (interval multiplied by 1000 for milliseconds)
